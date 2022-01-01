@@ -4,7 +4,20 @@ import { StyleSheet } from 'react-native';
 
 const heightContainer = HEIGHT * 0.095
 const styles = StyleSheet.create({
-
+  containerBottomTab: {
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+  },
   containerActive: {
     flex: 1,
     paddingVertical: 10,

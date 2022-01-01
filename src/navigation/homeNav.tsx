@@ -1,7 +1,7 @@
 
 import React, { Props } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { BottomTab } from './initScreen';
+import { BottomTab, MainFlowScreens } from './initScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image, Alert, View, TouchableOpacity, Text } from 'react-native';
 import styles from './styles';
@@ -20,7 +20,7 @@ const MyTabBar = ({ state, descriptors, navigation }) => {
     return null;
   }
   return (
-    <View style={{ flexDirection: 'row', marginBottom: 15, }}>
+    <View style={styles.containerBottomTab}>
       {state.routes.map((route: string, index: any) => {
         const { options } = descriptors[route.key];
 
@@ -44,9 +44,10 @@ const MyTabBar = ({ state, descriptors, navigation }) => {
             navigation.navigate(route.name);
           }
         };
-        if (index === 2) {
+        if (index === 1) {
           return (
             <TabBarAdvancedButton
+              key={index}
               isFocused={isFocused}
               onPress={onPress}
             />
@@ -55,7 +56,7 @@ const MyTabBar = ({ state, descriptors, navigation }) => {
         return (
           // eslint-disable-next-line react/jsx-key
           <TouchableOpacity
-            key={route.key}
+            key={index}
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
@@ -63,7 +64,7 @@ const MyTabBar = ({ state, descriptors, navigation }) => {
             style={styles.containerInactive}
           >
             <Image source={route.params.iconTab} style={[styles.iconImage, isFocused && { tintColor: colors.MAIN_PURPLE }]} />
-            <Text style={[{ paddingTop: 10, color: 'gray' }, isFocused && { color: colors.MAIN_PURPLE }]}>
+            <Text style={[{ color: 'gray', paddingBottom: 15 }, isFocused && { color: colors.MAIN_PURPLE }]}>
               {label}
             </Text>
           </TouchableOpacity>
@@ -81,10 +82,7 @@ const tabStackScreen = () => {
   return (
     <Tab.Navigator tabBar={props => <MyTabBar {...props} />}
       initialRouteName='Alert'
-      screenOptions={{
-
-      }
-      }
+      screenOptions={{ headerShown: false }}
     >
       {
         BottomTab.map(({ title, component, iconTab, colorTitle }) => (
@@ -103,11 +101,11 @@ const homeNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ gestureEnabled: false, headerShown: false }}>
       <Stack.Screen name={'mainBottomTab'} component={tabStackScreen} />
-      {/* {
+      {
         Object.entries(MainFlowScreens).map(([name, component]) => (
-            <Stack.Screen key={name} name={name} component={component} />
+          <Stack.Screen key={name} name={name} component={component} />
         ))
-      } */}
+      }
     </Stack.Navigator>
   );
 };

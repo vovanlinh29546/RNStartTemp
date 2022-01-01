@@ -45,6 +45,18 @@
       ],
       "@res/*": [
         "src/res/*"
+      ],
+      "@modules/*": [
+        "src/modules/*"
+      ],
+      "@screens/*": [
+        "src/screens/*"
+      ],
+      "@models/*": [
+        "src/models/*"
+      ],
+      "@components/*": [
+        "src/components/*"
       ]
     }, /* List of root folders whose combined content represents the structure of the project at runtime. */
     // "typeRoots": [],                       /* List of folders to include type definitions from. */

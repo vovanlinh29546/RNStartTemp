@@ -58,3 +58,4 @@ export const IMAGE_VIEWER = `${prefix}ImageViewer`;
 
 export const HOME_SCREEN = `${prefix}Home`;
 export const ADD_EVENT_TO_ITINERARY = `${prefix}AddEventToItinerary`;
+export const SWIPER = `${prefix}Swiper`;

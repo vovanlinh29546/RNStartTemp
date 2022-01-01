@@ -1,0 +1,112 @@
+diff --git a/node_modules/react-native-statusbar-alert/index.js b/node_modules/react-native-statusbar-alert/index.js
+index 9089b4d..48fbd25 100644
+--- a/node_modules/react-native-statusbar-alert/index.js
++++ b/node_modules/react-native-statusbar-alert/index.js
+@@ -32,13 +32,16 @@ class StatusBarAlert extends Component {
+ 						toValue:
+ 							Platform.OS === 'ios'
+ 								? this.props.height +
+-									(this.props.statusbarHeight || STATUS_BAR_HEIGHT)
++								(this.props.statusbarHeight || STATUS_BAR_HEIGHT)
+ 								: this.props.height,
+-						duration: SLIDE_DURATION
+-					}),
++						duration: SLIDE_DURATION,
++						useNativeDriver: false,
++					},
++					),
+ 					Animated.timing(this.state.opacity, {
+ 						toValue: 1,
+-						duration: SLIDE_DURATION
++						duration: SLIDE_DURATION,
++						useNativeDriver: false,
+ 					})
+ 				]).start();
+ 			});
+@@ -49,12 +52,14 @@ class StatusBarAlert extends Component {
+ 				if (Math.round(this.state.pulse._value) === 1) {
+ 					Animated.timing(this.state.pulse, {
+ 						toValue: 0,
+-						duration: PULSE_DURATION
++						duration: PULSE_DURATION,
++						useNativeDriver: false,
+ 					}).start();
+ 				} else {
+ 					Animated.timing(this.state.pulse, {
+ 						toValue: 1,
+-						duration: PULSE_DURATION
++						duration: PULSE_DURATION,
++						useNativeDriver: false,
+ 					}).start();
+ 				}
+ 			}
+@@ -65,7 +70,7 @@ class StatusBarAlert extends Component {
+ 		clearInterval(this.timer);
+ 	}
+ 
+-	componentWillReceiveProps(nextProps) {
++	UNSAFE_componentWillReceiveProps(nextProps) {
+ 		if (nextProps.visible !== this.props.visible) {
+ 			if (nextProps.visible === true) {
+ 				// Show alert
+@@ -75,13 +80,15 @@ class StatusBarAlert extends Component {
+ 							toValue:
+ 								Platform.OS === 'ios'
+ 									? nextProps.height +
+-										(this.props.statusbarHeight || STATUS_BAR_HEIGHT)
++									(this.props.statusbarHeight || STATUS_BAR_HEIGHT)
+ 									: nextProps.height,
+-							duration: SLIDE_DURATION
++							duration: SLIDE_DURATION,
++							useNativeDriver: false,
+ 						}),
+ 						Animated.timing(this.state.opacity, {
+ 							toValue: 1,
+-							duration: SLIDE_DURATION
++							duration: SLIDE_DURATION,
++							useNativeDriver: false,
+ 						})
+ 					]).start();
+ 				});
+@@ -92,11 +99,13 @@ class StatusBarAlert extends Component {
+ 					Animated.parallel([
+ 						Animated.timing(this.state.height, {
+ 							toValue: 0,
+-							duration: SLIDE_DURATION
++							duration: SLIDE_DURATION,
++							useNativeDriver: false,
+ 						}),
+ 						Animated.timing(this.state.opacity, {
+ 							toValue: 0,
+-							duration: SLIDE_DURATION
++							duration: SLIDE_DURATION,
++							useNativeDriver: false,
+ 						})
+ 					]).start();
+ 				});
+@@ -130,13 +139,13 @@ class StatusBarAlert extends Component {
+ 						backgroundColor:
+ 							this.props.pulse === 'background'
+ 								? this.state.pulse.interpolate({
+-										inputRange: [0, 1],
+-										outputRange: [
+-											this.props.backgroundColor,
+-											this.props.highlightColor ||
+-												saturate(this.props.backgroundColor, SATURATION)
+-										]
+-									})
++									inputRange: [0, 1],
++									outputRange: [
++										this.props.backgroundColor,
++										this.props.highlightColor ||
++										saturate(this.props.backgroundColor, SATURATION)
++									]
++								})
+ 								: this.props.backgroundColor
+ 					}
+ 				]}
+@@ -224,3 +233,4 @@ function saturate(color, percent) {
+ }
+ 
+ export default StatusBarAlert;
++

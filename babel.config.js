@@ -10,6 +10,11 @@ module.exports = {
         "alias": {
           "@src": "./src",
           "@res": "./src/res",
+          "@modules": "./src/modules",
+          "@screens": "./src/screens",
+          "@models": "./src/models",
+          "@components": "./src/components"
+
         }
       }
     ],

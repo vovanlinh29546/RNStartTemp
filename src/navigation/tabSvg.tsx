@@ -1,7 +1,7 @@
 import { ICON_HOME } from "@src/contants/icons";
 import { colors } from "@src/contants/vars";
 import React, { Props } from "react";
-import { Image, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import styles from "./styles";
 
@@ -39,6 +39,8 @@ export const TabBarAdvancedButton: React.FC<Props> = ({
       style={styles.background}
     />
     <TouchableOpacity
+      accessibilityState={props.isFocused ? { selected: true } : {}}
+      accessibilityLabel={props.tabBarAccessibilityLabel}
       style={[styles.button, props.isFocused && { backgroundColor: colors.MAIN_PURPLE }]}
       onPress={props.onPress}
     >
