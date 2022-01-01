@@ -1,6 +1,7 @@
 
 import { colors, HEIGHT } from '@src/contants/vars';
 import { StyleSheet } from 'react-native';
+import { ifIphoneX, isIphoneX } from 'react-native-iphone-x-helper';
 
 const heightContainer = HEIGHT * 0.095
 const styles = StyleSheet.create({
@@ -28,13 +29,15 @@ const styles = StyleSheet.create({
   },
   containerInactive: {
     flex: 1,
-    paddingVertical: 10,
+    paddingTop: 10,
+    paddingBottom: isIphoneX() ? 20 : 0,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
   },
   iconImage: {
-    tintColor: 'gray'
+    tintColor: 'gray',
+
   },
   container: {
     //  position: 'relative',

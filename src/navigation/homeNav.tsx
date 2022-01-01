@@ -64,14 +64,13 @@ const MyTabBar = ({ state, descriptors, navigation }) => {
             style={styles.containerInactive}
           >
             <Image source={route.params.iconTab} style={[styles.iconImage, isFocused && { tintColor: colors.MAIN_PURPLE }]} />
-            <Text style={[{ color: 'gray', paddingBottom: 15 }, isFocused && { color: colors.MAIN_PURPLE }]}>
+            <Text style={[{ color: 'gray', paddingTop: 15 }, isFocused && { color: colors.MAIN_PURPLE }]}>
               {label}
             </Text>
           </TouchableOpacity>
 
         );
       })}
-
     </View>
   );
 
@@ -80,9 +79,12 @@ const MyTabBar = ({ state, descriptors, navigation }) => {
 
 const tabStackScreen = () => {
   return (
-    <Tab.Navigator tabBar={props => <MyTabBar {...props} />}
+    <Tab.Navigator tabBar={props => (
+
+      <MyTabBar {...props} />)}
       initialRouteName='Alert'
       screenOptions={{ headerShown: false }}
+
     >
       {
         BottomTab.map(({ title, component, iconTab, colorTitle }) => (
