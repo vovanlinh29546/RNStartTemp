@@ -1,27 +1,45 @@
-import React from "react";
-import { ScrollView, StatusBar, useColorScheme, View } from "react-native";
+import { SWIPER } from "@src/contants/screenKeys";
+import NavigationActionsService from "@src/navigation/navigation";
+import React, { useMemo } from "react";
+import { FlatList, Image, ScrollView, StatusBar, Text, TouchableOpacity, useColorScheme, View } from "react-native";
 import { Colors, Header } from "react-native/Libraries/NewAppScreen";
 import Collapsible from "../Collapsible";
-
+import { useNavigation } from '@react-navigation/native';
+import CustomHeader from "@src/components/CustomHeader";
+import { LOGO_BANNER } from "@src/contants/icons";
+import { WIDTH, WIDTH_RATIO } from "@src/contants/vars";
 const HomeScreen = (props: any) => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const navigation = useNavigation();
+
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+
   };
+  const banner = () => {
+    return (
+      <Image
+        resizeMode="contain"
+        style={{
+          alignSelf: 'center',
+          width: WIDTH - 50,
+        }}
+        source={LOGO_BANNER} />
+    )
+  }
+
   return (
-    <View style={{}}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <CustomHeader
+        title={'Home'}
+      />
       <ScrollView
+        bounces={false}
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Collapsible />
-        </View>
+
+        {banner()}
+
       </ScrollView>
+
     </View>
   );
 }
